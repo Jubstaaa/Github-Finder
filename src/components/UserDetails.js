@@ -63,9 +63,8 @@ class UserDetails extends Component {
                   {blog && (
                     <div>
                       <i className="fas fa-link mr-2"></i>
-                      <a href={`https://www.${blog}`} target="_blank">
-                        {blog}
-                      </a>
+
+                      {blog}
                     </div>
                   )}
                   {twitter_username && (
@@ -104,7 +103,7 @@ class UserDetails extends Component {
                     </span>
                   </div>
                   <div className="row ">
-                    <Repos repos={repos} />
+                    <Repos repos={repos} user={this.props.user} />
                   </div>
                 </div>
               </div>

@@ -7,6 +7,7 @@
     "babel-loader": "^8.2.5",
     "css-loader": "^4.2.1",
     "file-loader": "^6.0.0",
+    "markdown-it-header-sections": "^1.0.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^9.0.3",
     "style-loader": "^1.2.1",

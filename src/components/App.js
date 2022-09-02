@@ -7,7 +7,9 @@ import Alert from "./Alert";
 import About from "./About";
 import { BrowserRouter, Route, Switch, Link, NavLink } from "react-router-dom";
 import UserDetails from "./UserDetails";
-
+import RepoDetails from "./RepoDetails";
+import FileDetails from "./FileDetails";
+import PageNotFound from "./PageNotFound";
 export class App extends Component {
   constructor(props) {
     super(props);
@@ -16,12 +18,16 @@ export class App extends Component {
     this.setAlert = this.setAlert.bind(this);
     this.getUser = this.getUser.bind(this);
     this.getUserRepos = this.getUserRepos.bind(this);
+    this.getRepoDetails = this.getRepoDetails.bind(this);
+    this.getFileDetails = this.getFileDetails.bind(this);
     this.state = {
       loading: false,
       users: [],
       user: {},
       repos: [],
       alert: null,
+      repoDetails: [],
+      fileDetails: [],
     };
   }
 
@@ -39,6 +45,24 @@ export class App extends Component {
     axios
       .get(`https://api.github.com/users/${username}/repos`)
       .then((res) => this.setState({ repos: res.data, loading: false }));
+  }
+
+  getRepoDetails(username, repo) {
+    this.setState({ repoDetails: [] });
+    this.setState({ loading: true });
+    axios
+      .get(`https://api.github.com/repos/${username}/${repo}/contents/`)
+      .then((res) => this.setState({ repoDetails: res.data, loading: false }));
+  }
+
+  getFileDetails(username, repo, branch, file) {
+    this.setState({ fileDetails: [] });
+    this.setState({ loading: true });
+    axios
+      .get(
+        `https://raw.githubusercontent.com/${username}/${repo}/${branch}/${file}`
+      )
+      .then((res) => this.setState({ fileDetails: res, loading: false }));
   }
 
   searchUsers(keyword) {
@@ -105,6 +129,37 @@ export class App extends Component {
               />
             )}
           />
+          <Route
+            exact
+            path="/user/:login/:repo"
+            render={(props) => (
+              <RepoDetails
+                {...props}
+                getRepoDetails={this.getRepoDetails}
+                getUser={this.getUser}
+                getUserRepos={this.getUserRepos}
+                loading={this.state.loading}
+                repoDetails={this.state.repoDetails}
+                user={this.state.user}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/user/:login/:repo/:branch/:file"
+            render={(props) => (
+              <FileDetails
+                {...props}
+                getFileDetails={this.getFileDetails}
+                getRepoDetails={this.getRepoDetails}
+                loading={this.state.loading}
+                repoDetails={this.state.repoDetails}
+                user={this.state.user}
+                fileDetails={this.state.fileDetails}
+              />
+            )}
+          />
+          <Route path="*" render={() => <PageNotFound />} />
         </Switch>
       </BrowserRouter>
     );

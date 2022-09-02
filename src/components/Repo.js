@@ -1,20 +1,18 @@
 import React from "react";
-import Repos from "./Repos";
+import { Link } from "react-router-dom";
 
-const Repo = ({ repo }) => {
+const Repo = ({ repo, user }) => {
   return (
     <div className="col-md-6 my-2 ">
       <div className="card ">
         <div className="card-header">
-          <a href={repo.html_url} target="_blank">
-            {repo.name}
-          </a>
+          <Link to={`/user/${user.login}/${repo.name}`}>{repo.name}</Link>
         </div>
         <div className="card-body">
           {repo.description && <p className="repo-desc">{repo.description}</p>}
 
           <div>
-            <i class="fas fa-code mr-2"></i>
+            <i className="fas fa-code mr-2"></i>
             {repo.language}
           </div>
         </div>
