@@ -20,6 +20,7 @@ export class App extends Component {
     this.getUserRepos = this.getUserRepos.bind(this);
     this.getRepoDetails = this.getRepoDetails.bind(this);
     this.getFileDetails = this.getFileDetails.bind(this);
+    this.getLanguageDetails = this.getLanguageDetails.bind(this);
     this.state = {
       loading: false,
       users: [],
@@ -28,6 +29,7 @@ export class App extends Component {
       alert: null,
       repoDetails: [],
       fileDetails: [],
+      languages: {},
     };
   }
 
@@ -63,6 +65,14 @@ export class App extends Component {
         `https://raw.githubusercontent.com/${username}/${repo}/${branch}/${file}`
       )
       .then((res) => this.setState({ fileDetails: res, loading: false }));
+  }
+
+  getLanguageDetails(username, repo) {
+    this.setState({ languages: {} });
+    this.setState({ loading: true });
+    axios
+      .get(`https://api.github.com/repos/${username}/${repo}/languages`)
+      .then((res) => this.setState({ languages: res.data, loading: false }));
   }
 
   searchUsers(keyword) {
@@ -133,30 +143,37 @@ export class App extends Component {
             exact
             path="/user/:login/:repo"
             render={(props) => (
-              <RepoDetails
-                {...props}
-                getRepoDetails={this.getRepoDetails}
-                getUser={this.getUser}
-                getUserRepos={this.getUserRepos}
-                loading={this.state.loading}
-                repoDetails={this.state.repoDetails}
-                user={this.state.user}
-              />
+              <div>
+                <RepoDetails
+                  {...props}
+                  getRepoDetails={this.getRepoDetails}
+                  getUser={this.getUser}
+                  getUserRepos={this.getUserRepos}
+                  getLanguageDetails={this.getLanguageDetails}
+                  loading={this.state.loading}
+                  repoDetails={this.state.repoDetails}
+                  user={this.state.user}
+                  languages={this.state.languages}
+                />
+              </div>
             )}
           />
           <Route
             exact
             path="/user/:login/:repo/:branch/:file"
             render={(props) => (
-              <FileDetails
-                {...props}
-                getFileDetails={this.getFileDetails}
-                getRepoDetails={this.getRepoDetails}
-                loading={this.state.loading}
-                repoDetails={this.state.repoDetails}
-                user={this.state.user}
-                fileDetails={this.state.fileDetails}
-              />
+              <div>
+                {console.log(props)}
+                <FileDetails
+                  {...props}
+                  getFileDetails={this.getFileDetails}
+                  getRepoDetails={this.getRepoDetails}
+                  loading={this.state.loading}
+                  repoDetails={this.state.repoDetails}
+                  user={this.state.user}
+                  fileDetails={this.state.fileDetails}
+                />
+              </div>
             )}
           />
           <Route path="*" render={() => <PageNotFound />} />

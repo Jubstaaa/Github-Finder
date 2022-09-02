@@ -63,8 +63,16 @@ class UserDetails extends Component {
                   {blog && (
                     <div>
                       <i className="fas fa-link mr-2"></i>
-
-                      {blog}
+                      <a
+                        href={`//${
+                          /^((http[s]?|ftp):\/\/)?\/?([^\/\.]+\.)*?([^\/\.]+\.[^:\/\s\.]{1,3}(\.[^:\/\s\.]{1,2})?(:\d+)?)($|\/)([^#?\s]+)?(.*?)?(#[\w\-]+)?$/.exec(
+                            blog
+                          )[4]
+                        }`}
+                        target="_blank"
+                      >
+                        {blog}
+                      </a>
                     </div>
                   )}
                   {twitter_username && (

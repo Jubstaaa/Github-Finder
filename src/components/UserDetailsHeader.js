@@ -15,6 +15,13 @@ class UserDetailsHeader extends Component {
             />
             <Link exact to={`/user/${this.props.user.login}`}>
               {this.props.user.login}
+            </Link>{" "}
+            /{" "}
+            <Link
+              exact
+              to={`/user/${this.props.user.login}/${this.props.match.params.repo}`}
+            >
+              {this.props.match.params.repo}
             </Link>
             <a href="#" onClick={this.props.history.goBack}>
               <i className="fas fa-arrow-left fa-2x float-right 	"></i>

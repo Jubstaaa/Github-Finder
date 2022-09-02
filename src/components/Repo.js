@@ -13,7 +13,7 @@ const Repo = ({ repo, user }) => {
 
           <div>
             <i className="fas fa-code mr-2"></i>
-            {repo.language}
+            <span className="badge badge-info">{repo.language}</span>
           </div>
         </div>
       </div>

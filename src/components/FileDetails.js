@@ -16,6 +16,7 @@ class FileDetails extends Component {
         <UserDetailsHeader
           user={this.props.user}
           history={this.props.history}
+          match={this.props.match}
         />
         <div className="container">
           <div className="card overflow-auto" style={{ maxHeight: "100vh" }}>
