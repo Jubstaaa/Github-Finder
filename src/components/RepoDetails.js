@@ -41,18 +41,53 @@ class RepoDetails extends Component {
           />
           <div className="container">
             <ul className="list-group">
-              <li className="list-group-item text-left ">
-                {Object.entries(this.props.languages).map(
-                  ([key, val] = entry) => {
-                    return (
-                      <span className="mx-2 badge badge-primary">
-                        {key}
-                        {`(%${this.percentCalc(val)})`}
-                      </span>
-                    );
-                  }
-                )}
-              </li>
+              {Object.keys(this.props.languages).length > 0 && (
+                <li className="list-group-item text-left ">
+                  <div className="progress">
+                    {Object.entries(this.props.languages).map(
+                      ([key, val] = entry) => {
+                        return (
+                          <div
+                            className="progress-bar"
+                            style={{
+                              width: `${this.percentCalc(val)}%`,
+                              backgroundColor: `${this.props.colors[key].color}`,
+                            }}
+                          >
+                            {console.log(key)}
+                          </div>
+                        );
+                      }
+                    )}
+                  </div>
+                  <div>
+                    {Object.entries(this.props.languages).map(
+                      ([key, val] = entry) => {
+                        return (
+                          <>
+                            <svg height="10" width="10">
+                              <circle
+                                cx="5"
+                                cy="5"
+                                r="5"
+                                fill={`${this.props.colors[key].color}`}
+                              />
+                            </svg>
+
+                            <span className=" badge ">
+                              {key}
+                              <span className="mx-1  font-weight-light">{`(%${this.percentCalc(
+                                val
+                              )})`}</span>
+                            </span>
+                          </>
+                        );
+                      }
+                    )}
+                  </div>
+                </li>
+              )}
+
               {this.props.repoDetails.map((repoDetail, index) => (
                 <RepoDetail
                   repoDetail={repoDetail}

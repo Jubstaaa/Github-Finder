@@ -111,7 +111,11 @@ class UserDetails extends Component {
                     </span>
                   </div>
                   <div className="row ">
-                    <Repos repos={repos} user={this.props.user} />
+                    <Repos
+                      repos={repos}
+                      user={this.props.user}
+                      colors={this.props.colors}
+                    />
                   </div>
                 </div>
               </div>

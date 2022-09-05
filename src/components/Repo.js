@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Repo = ({ repo, user }) => {
+const Repo = ({ repo, user, colors }) => {
   return (
     <div className="col-md-6 my-2 ">
       <div className="card ">
@@ -11,10 +11,20 @@ const Repo = ({ repo, user }) => {
         <div className="card-body">
           {repo.description && <p className="repo-desc">{repo.description}</p>}
 
-          <div>
-            <i className="fas fa-code mr-2"></i>
-            <span className="badge badge-info">{repo.language}</span>
-          </div>
+          {repo.language && (
+            <div>
+              <svg height="10" width="10">
+                <circle
+                  cx="5"
+                  cy="5"
+                  r="5"
+                  fill={`${colors[repo.language].color}`}
+                />
+              </svg>
+
+              <span className="badge ">{repo.language}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>
