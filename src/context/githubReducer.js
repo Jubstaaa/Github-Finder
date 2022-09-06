@@ -1,5 +1,3 @@
-import { useReducer } from "react";
-
 const githubReducer = (state, action) => {
   switch (action.type) {
     case "SEARCH_USERS":

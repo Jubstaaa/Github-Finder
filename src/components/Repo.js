@@ -6,7 +6,16 @@ const Repo = ({ repo, user, colors }) => {
     <div className="col-md-6 my-2 ">
       <div className="card ">
         <div className="card-header">
-          <Link to={`/user/${user.login}/${repo.name}`}>{repo.name}</Link>
+          <Link
+            to={{
+              pathname: `/user/${user.login}/${repo.name}`,
+              state: {
+                url: `${repo.url}/contents`,
+              },
+            }}
+          >
+            {repo.name}
+          </Link>
         </div>
         <div className="card-body">
           {repo.description && <p className="repo-desc">{repo.description}</p>}

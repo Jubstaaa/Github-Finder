@@ -2369,32 +2369,26 @@ const GithubState = (props) => {
     });
   };
 
-  const getRepoDetails = (username, repo) => {
+  const getRepoDetails = (url) => {
     dispatch({ type: "CLEAR_REPO_DETAILS" });
     setLoading();
-    axios
-      .get(`https://api.github.com/repos/${username}/${repo}/contents/`)
-      .then((res) => {
-        dispatch({
-          type: "GET_REPO_DETAILS",
-          payload: res.data,
-        });
+    axios.get(`${url}`).then((res) => {
+      dispatch({
+        type: "GET_REPO_DETAILS",
+        payload: res.data,
       });
+    });
   };
 
-  const getFileDetails = (username, repo, branch, file) => {
+  const getFileDetails = (url) => {
     dispatch({ type: "CLEAR_FILE_DETAILS" });
     setLoading();
-    axios
-      .get(
-        `https://raw.githubusercontent.com/${username}/${repo}/${branch}/${file}`
-      )
-      .then((res) => {
-        dispatch({
-          type: "GET_FILE_DETAILS",
-          payload: res,
-        });
+    axios.get(`${url}`).then((res) => {
+      dispatch({
+        type: "GET_FILE_DETAILS",
+        payload: res,
       });
+    });
   };
 
   const getLanguageDetails = (username, repo) => {

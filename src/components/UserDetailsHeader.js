@@ -14,16 +14,19 @@ class UserDetailsHeader extends Component {
             />
             <Link to={`/user/${this.props.user.login}`}>
               {this.props.user.login}
-            </Link>{" "}
-            /{" "}
+            </Link>
+            {/* /
             <Link
-              to={`/user/${this.props.user.login}/${this.props.match.params.repo}`}
+              to={{
+                pathname: `/user/${this.props.user.login}/${this.props.match.params.repo}`,
+                state: { url: this.props.history.location.state.url },
+              }}
             >
               {this.props.match.params.repo}
-            </Link>
-            <a href="#" onClick={this.props.history.goBack}>
+            </Link> */}
+            {/* <a href="#" onClick={this.props.history.goBack}>
               <i className="fas fa-arrow-left fa-2x float-right 	"></i>
-            </a>
+            </a> */}
           </div>
         </div>
       </div>

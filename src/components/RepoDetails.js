@@ -5,7 +5,7 @@ import UserDetailsHeader from "./UserDetailsHeader";
 import GithubContext from "../context/githubContext";
 import GithubState from "../context/githubState";
 
-const RepoDetails = ({ match, history }) => {
+const RepoDetails = ({ match, history, location }) => {
   const {
     getRepoDetails,
     getUser,
@@ -17,12 +17,20 @@ const RepoDetails = ({ match, history }) => {
     languages,
     colors,
   } = useContext(GithubContext);
+
   useEffect(() => {
-    getRepoDetails(match.params.login, match.params.repo);
+    getRepoDetails(location.state.url);
     getUser(match.params.login);
     getUserRepos(match.params.login);
     getLanguageDetails(match.params.login, match.params.repo);
   }, []);
+
+  useEffect(() => {
+    getRepoDetails(location.state.url);
+    getUser(match.params.login);
+    getUserRepos(match.params.login);
+    getLanguageDetails(match.params.login, match.params.repo);
+  }, [location]);
 
   const percentCalc = (val) => {
     let values = Object.values(languages);
@@ -38,7 +46,7 @@ const RepoDetails = ({ match, history }) => {
     return <Loading />;
   } else {
     return (
-      <GithubState>
+      <>
         <UserDetailsHeader user={user} history={history} match={match} />
         <div className="container">
           <ul className="list-group">
@@ -93,7 +101,7 @@ const RepoDetails = ({ match, history }) => {
             ))}
           </ul>
         </div>
-      </GithubState>
+      </>
     );
   }
 };

@@ -6,7 +6,6 @@ import GithubContext from "../context/githubContext";
 const UserDetails = ({ match }) => {
   const { getUser, loading, user, colors, getUserRepos, repos } =
     useContext(GithubContext);
-
   useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);

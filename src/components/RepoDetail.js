@@ -25,13 +25,35 @@ export class RepoDetail extends Component {
           ) : (
             <i className="fas fa-folder mr-2"></i>
           )}
-          <Link
-            to={`/user/${params.login}/${params.repo}/${/(?<=ref=).*$/.exec(
-              repoDetail.url
-            )}/${repoDetail.name}`}
-          >
-            {repoDetail.name}
-          </Link>
+          {repoDetail.type == "file" ? (
+            <>
+              <Link
+                to={{
+                  pathname: `/user/${params.login}/${params.repo}/${repoDetail.type}/${repoDetail.name}`,
+                  state: { repoDetail: repoDetail },
+                }}
+              >
+                {repoDetail.name}
+              </Link>
+              <a
+                className="mx-2"
+                href={repoDetail.download_url}
+                target="_blank"
+              >
+                <i className="fas fa-file-download"></i>
+              </a>
+            </>
+          ) : (
+            <Link
+              to={{
+                pathname: `/user/${params.login}/${params.repo}/${repoDetail.type}/${repoDetail.name}`,
+                state: { url: repoDetail.url },
+              }}
+            >
+              {repoDetail.name}
+            </Link>
+          )}
+
           <span className="float-right">
             {repoDetail.type != "dir" ? byteCalc(repoDetail.size) : null}
           </span>
