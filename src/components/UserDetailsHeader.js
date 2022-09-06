@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { browserHistory } from "react-router";
 
 class UserDetailsHeader extends Component {
   render() {
@@ -13,12 +12,11 @@ class UserDetailsHeader extends Component {
               className="mr-2 rounded-circle"
               width="40"
             />
-            <Link exact to={`/user/${this.props.user.login}`}>
+            <Link to={`/user/${this.props.user.login}`}>
               {this.props.user.login}
             </Link>{" "}
             /{" "}
             <Link
-              exact
               to={`/user/${this.props.user.login}/${this.props.match.params.repo}`}
             >
               {this.props.match.params.repo}

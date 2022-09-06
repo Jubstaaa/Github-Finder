@@ -1,16 +1,12 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useContext, useEffect } from "react";
 import Loading from "./Loading";
 import Repos from "./Repos";
+import GithubContext from "../context/githubContext";
 
-const UserDetails = ({
-  getUser,
-  getUserRepos,
-  match,
-  loading,
-  repos,
-  user,
-  colors,
-}) => {
+const UserDetails = ({ match }) => {
+  const { getUser, loading, user, colors, getUserRepos, repos } =
+    useContext(GithubContext);
+
   useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
@@ -72,7 +68,7 @@ const UserDetails = ({
                     <i className="fas fa-link mr-2"></i>
                     <a
                       href={`//${
-                        /^((http[s]?|ftp):\/\/)?\/?([^\/\.]+\.)*?([^\/\.]+\.[^:\/\s\.]{1,3}(\.[^:\/\s\.]{1,2})?(:\d+)?)($|\/)([^#?\s]+)?(.*?)?(#[\w\-]+)?$/.exec(
+                        /^((http[s]?|ftp):\/\/)?\/?([^\/\.]+\.)*?([^\/\.]+\.[^:\/\s\.]{1,10}(\.[^:\/\s\.]{1,2})?(:\d+)?)($|\/)([^#?\s]+)?(.*?)?(#[\w\-]+)?$/.exec(
                           blog
                         )[4]
                       }`}

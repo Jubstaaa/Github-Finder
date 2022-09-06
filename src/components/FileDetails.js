@@ -1,35 +1,33 @@
-import React, { Component } from "react";
+import React, { Component, useContext, useEffect } from "react";
 import UserDetailsHeader from "./UserDetailsHeader";
+import GithubContext from "../context/githubContext";
 
-class FileDetails extends Component {
-  componentDidMount() {
-    this.props.getFileDetails(
-      this.props.match.params.login,
-      this.props.match.params.repo,
-      this.props.match.params.branch,
-      this.props.match.params.file
+const FileDetails = ({ match, history }) => {
+  const { user, getFileDetails, fileDetails } = useContext(GithubContext);
+
+  useEffect(() => {
+    getFileDetails(
+      match.params.login,
+      match.params.repo,
+      match.params.branch,
+      match.params.file
     );
-  }
-  render() {
-    return (
-      <>
-        <UserDetailsHeader
-          user={this.props.user}
-          history={this.props.history}
-          match={this.props.match}
-        />
-        <div className="container">
-          <div className="card overflow-auto" style={{ maxHeight: "100vh" }}>
-            <pre style={{ whiteSpace: "pre-wrap" }}>
-              {typeof this.props.fileDetails.data !== "object"
-                ? this.props.fileDetails.data
-                : JSON.stringify(this.props.fileDetails.data)}
-            </pre>
-          </div>
+  }, []);
+
+  return (
+    <>
+      <UserDetailsHeader user={user} history={history} match={match} />
+      <div className="container">
+        <div className="card overflow-auto" style={{ maxHeight: "100vh" }}>
+          <pre style={{ whiteSpace: "pre-wrap" }}>
+            {typeof fileDetails.data !== "object"
+              ? fileDetails.data
+              : JSON.stringify(fileDetails.data)}
+          </pre>
         </div>
-      </>
-    );
-  }
-}
+      </div>
+    </>
+  );
+};
 
 export default FileDetails;

@@ -26,7 +26,6 @@ export class RepoDetail extends Component {
             <i className="fas fa-folder mr-2"></i>
           )}
           <Link
-            exact
             to={`/user/${params.login}/${params.repo}/${/(?<=ref=).*$/.exec(
               repoDetail.url
             )}/${repoDetail.name}`}

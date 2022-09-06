@@ -14,7 +14,7 @@ class PageNotFound extends Component {
                 Sorry, an error has occured, Requested page not found!
               </div>
               <div class="error-actions">
-                <Link exact to="/" class="btn btn-primary btn-lg">
+                <Link to="/" class="btn btn-primary btn-lg">
                   <span class="glyphicon glyphicon-home"></span>
                   Take Me Home
                 </Link>
