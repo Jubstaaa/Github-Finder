@@ -48,6 +48,7 @@ class RepoDetails extends Component {
                       ([key, val] = entry) => {
                         return (
                           <div
+                            key={key}
                             className="progress-bar"
                             style={{
                               width: `${this.percentCalc(val)}%`,
@@ -64,7 +65,7 @@ class RepoDetails extends Component {
                     {Object.entries(this.props.languages).map(
                       ([key, val] = entry) => {
                         return (
-                          <>
+                          <div key={key}>
                             <svg height="10" width="10">
                               <circle
                                 cx="5"
@@ -80,7 +81,7 @@ class RepoDetails extends Component {
                                 val
                               )})`}</span>
                             </span>
-                          </>
+                          </div>
                         );
                       }
                     )}
