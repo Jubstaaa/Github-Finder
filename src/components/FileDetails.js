@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import Loading from "./Loading";
 import UserDetailsHeader from "./UserDetailsHeader";
 import GithubContext from "../context/githubContext";
+import ReactMarkdown from "react-markdown";
 
 const FileDetails = ({ match, history, location }) => {
   console.log();
@@ -17,11 +18,13 @@ const FileDetails = ({ match, history, location }) => {
       <>
         <UserDetailsHeader user={user} history={history} match={match} />
         <div className="container">
-          <div className="card overflow-auto" style={{ maxHeight: "100vh" }}>
+          <div className="card overflow-auto" style={{ maxHeight: "500px" }}>
             <pre style={{ whiteSpace: "pre-wrap" }}>
-              {typeof fileDetails.data !== "object"
-                ? fileDetails.data
-                : JSON.stringify(fileDetails.data)}
+              <ReactMarkdown>
+                {typeof fileDetails.data !== "object"
+                  ? fileDetails.data
+                  : JSON.stringify(fileDetails.data)}
+              </ReactMarkdown>
             </pre>
           </div>
         </div>

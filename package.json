@@ -9,6 +9,7 @@
     "file-loader": "^6.0.0",
     "markdown-it-header-sections": "^1.0.0",
     "node-sass": "^4.14.1",
+    "react-markdown": "^8.0.3",
     "sass-loader": "^9.0.3",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",

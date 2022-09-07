@@ -16,7 +16,6 @@ const byteCalc = (bytes, decimals = 2) => {
 export class RepoDetail extends Component {
   render() {
     const { user, repoDetail, params, index } = this.props;
-
     return (
       <div>
         <li className="list-group-item ">

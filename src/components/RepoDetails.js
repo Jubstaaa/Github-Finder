@@ -9,6 +9,7 @@ const RepoDetails = ({ match, history, location }) => {
     getRepoDetails,
     getUser,
     getUserRepos,
+    getFileDetails,
     getLanguageDetails,
     loading,
     repoDetails,
@@ -104,6 +105,7 @@ const RepoDetails = ({ match, history, location }) => {
                 repoDetail={repoDetail}
                 key={index}
                 params={match.params}
+                getFileDetails={getFileDetails}
               />
             ))}
           </ul>
