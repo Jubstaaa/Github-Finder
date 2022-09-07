@@ -68,7 +68,9 @@ const RepoDetails = ({ match, history, location }) => {
                         className="progress-bar"
                         style={{
                           width: `${percentCalc(val)}%`,
-                          backgroundColor: `${colors[key].color}`,
+                          backgroundColor: `${
+                            colors[key] ? colors[key].color : "#000"
+                          }`,
                         }}
                       ></div>
                     );
@@ -83,7 +85,7 @@ const RepoDetails = ({ match, history, location }) => {
                             cx="5"
                             cy="5"
                             r="5"
-                            fill={`${colors[key].color}`}
+                            fill={`${colors[key] ? colors[key].color : "#000"}`}
                           />
                         </svg>
 

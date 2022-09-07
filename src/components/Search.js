@@ -1,10 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import GithubContext from "../context/githubContext";
 
 const Search = () => {
-  const { searchUsers, clearUsers, users, setAlert } =
+  const { searchUsers, clearUsers, users, setAlert, getColors } =
     useContext(GithubContext);
   const [keyword, setKeyword] = useState("");
+
+  useEffect(() => {
+    getColors();
+  }, []);
+
   const onChange = (e) => {
     setKeyword(e.target.value);
   };

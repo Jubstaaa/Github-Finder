@@ -27,7 +27,9 @@ const Repo = ({ repo, user, colors }) => {
                   cx="5"
                   cy="5"
                   r="5"
-                  fill={`${colors[repo.language].color}`}
+                  fill={`${
+                    colors[repo.language] ? colors[repo.language].color : "#000"
+                  }`}
                 />
               </svg>
 

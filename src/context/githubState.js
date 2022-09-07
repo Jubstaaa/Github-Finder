@@ -2458,6 +2458,24 @@ const GithubState = (props) => {
       });
   };
 
+  const getColors = () => {
+    axios
+      .get(
+        `https://raw.githubusercontent.com/ozh/github-colors/master/colors.json`
+      )
+      .then((res) => {
+        dispatch({
+          type: "SET_COLORS",
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        if (err.response.status > 400) {
+          console.log(err);
+        }
+      });
+  };
+
   const clearUsers = () => {
     dispatch({ type: "CLEAR_USERS" });
   };
@@ -2493,6 +2511,7 @@ const GithubState = (props) => {
         getRepoDetails,
         getFileDetails,
         getLanguageDetails,
+        getColors,
       }}
     >
       {props.children}
