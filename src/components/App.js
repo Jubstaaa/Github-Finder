@@ -1,16 +1,15 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import Navbar from "./Navbar";
 import Search from "./Search";
 import Users from "./Users";
 import Alert from "./Alert";
 import About from "./About";
-import { BrowserRouter, Route, Switch, Link, NavLink } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import UserDetails from "./UserDetails";
 import RepoDetails from "./RepoDetails";
 import FileDetails from "./FileDetails";
 import PageNotFound from "./PageNotFound";
 import GithubState from "../context/githubState";
-import GithubContext from "../context/githubContext";
 
 const App = () => {
   return (

@@ -1,21 +1,9 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class User extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: "9998250",
-      name: "İlker Balcılar",
-      login: "Jubstaaa",
-      avatar_url: "https://avatars.githubusercontent.com/u/9998250?v=4",
-      html_url: "https://github.com/Jubstaaa",
-      followers: 0,
-      blog: "winniesoft.com",
-    };
-  }
   render() {
-    const { login, id, avatar_url, html_url } = this.props.user;
+    const { login, avatar_url } = this.props.user;
 
     return (
       <>

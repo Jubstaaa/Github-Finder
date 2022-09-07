@@ -3,7 +3,6 @@ import RepoDetail from "./RepoDetail";
 import Loading from "./Loading";
 import UserDetailsHeader from "./UserDetailsHeader";
 import GithubContext from "../context/githubContext";
-import GithubState from "../context/githubState";
 
 const RepoDetails = ({ match, history, location }) => {
   const {
@@ -19,14 +18,22 @@ const RepoDetails = ({ match, history, location }) => {
   } = useContext(GithubContext);
 
   useEffect(() => {
-    getRepoDetails(location.state.url);
+    getRepoDetails(
+      location.state
+        ? location.state.url
+        : `https://api.github.com/repos/${match.params.login}/${match.params.repo}/contents/`
+    );
     getUser(match.params.login);
     getUserRepos(match.params.login);
     getLanguageDetails(match.params.login, match.params.repo);
   }, []);
 
   useEffect(() => {
-    getRepoDetails(location.state.url);
+    getRepoDetails(
+      location.state
+        ? location.state.url
+        : `https://api.github.com/repos/${match.params.login}/${match.params.repo}/contents/`
+    );
     getUser(match.params.login);
     getUserRepos(match.params.login);
     getLanguageDetails(match.params.login, match.params.repo);

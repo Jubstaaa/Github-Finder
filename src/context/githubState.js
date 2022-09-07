@@ -2333,6 +2333,7 @@ const GithubState = (props) => {
 
   const searchUsers = (keyword) => {
     dispatch({ type: "CLEAR_USERS" });
+    dispatch({ type: "REMOVE_ALERT" });
     setLoading();
     axios
       .get(`https://api.github.com/search/users?q=${keyword}`)
@@ -2341,54 +2342,99 @@ const GithubState = (props) => {
           type: "SEARCH_USERS",
           payload: res.data.items,
         });
-        // if (state.users.length <= 0) {
-        //   this.setAlert("No user found", "warning");
-        // }
+      })
+      .catch((err) => {
+        if (err.response.status > 400) {
+          setAlert(
+            "The url information is incorrect or unable to connect to server",
+            "danger"
+          );
+        }
       });
   };
 
   const getUser = (username) => {
     dispatch({ type: "CLEAR_USER" });
     setLoading();
-    axios.get(`https://api.github.com/users/${username}`).then((res) => {
-      dispatch({
-        type: "GET_USER",
-        payload: res.data,
+    axios
+      .get(`https://api.github.com/users/${username}`)
+      .then((res) => {
+        dispatch({
+          type: "GET_USER",
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        if (err.response.status > 400) {
+          setAlert(
+            "The url information is incorrect or unable to connect to server",
+            "danger"
+          );
+        }
       });
-    });
   };
 
   const getUserRepos = (username) => {
     dispatch({ type: "CLEAR_REPOS" });
     setLoading();
-    axios.get(`https://api.github.com/users/${username}/repos`).then((res) => {
-      dispatch({
-        type: "GET_REPOS",
-        payload: res.data,
+    axios
+      .get(`https://api.github.com/users/${username}/repos`)
+      .then((res) => {
+        dispatch({
+          type: "GET_REPOS",
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        if (err.response.status > 400) {
+          setAlert(
+            "The url information is incorrect or unable to connect to server",
+            "danger"
+          );
+        }
       });
-    });
   };
 
   const getRepoDetails = (url) => {
     dispatch({ type: "CLEAR_REPO_DETAILS" });
     setLoading();
-    axios.get(`${url}`).then((res) => {
-      dispatch({
-        type: "GET_REPO_DETAILS",
-        payload: res.data,
+    axios
+      .get(`${url}`)
+      .then((res) => {
+        dispatch({
+          type: "GET_REPO_DETAILS",
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        if (err.response.status > 400) {
+          setAlert(
+            "The url information is incorrect or unable to connect to server",
+            "danger"
+          );
+        }
       });
-    });
   };
 
   const getFileDetails = (url) => {
     dispatch({ type: "CLEAR_FILE_DETAILS" });
     setLoading();
-    axios.get(`${url}`).then((res) => {
-      dispatch({
-        type: "GET_FILE_DETAILS",
-        payload: res,
+    axios
+      .get(`${url}`)
+      .then((res) => {
+        dispatch({
+          type: "GET_FILE_DETAILS",
+          payload: res,
+        });
+      })
+      .catch((err) => {
+        if (err.response.status > 400) {
+          setAlert(
+            "The url information is incorrect or unable to connect to server",
+            "danger"
+          );
+        }
       });
-    });
   };
 
   const getLanguageDetails = (username, repo) => {
@@ -2401,6 +2447,14 @@ const GithubState = (props) => {
           type: "GET_LANGUAGES_DETAILS",
           payload: res.data,
         });
+      })
+      .catch((err) => {
+        if (err.response.status > 400) {
+          setAlert(
+            "The url information is incorrect or unable to connect to server",
+            "danger"
+          );
+        }
       });
   };
 
@@ -2417,11 +2471,6 @@ const GithubState = (props) => {
       type: "SET_ALERT",
       payload: { msg, type },
     });
-    // setTimeout(() => {
-    //   dispatch({
-    //     type: "REMOVE_ALERT",
-    //   });
-    // }, 2000);
   };
 
   return (

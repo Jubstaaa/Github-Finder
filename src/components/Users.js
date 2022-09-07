@@ -1,11 +1,10 @@
-import React, { Component, useContext } from "react";
+import React, { Component, useContext, useEffect, useRef } from "react";
 import User from "./User";
 import Loading from "./Loading";
 import GithubContext from "../context/githubContext";
 
 const Users = () => {
   const { users, loading } = useContext(GithubContext);
-
   if (loading) {
     return <Loading />;
   } else {

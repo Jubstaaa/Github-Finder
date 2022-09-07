@@ -27,7 +27,7 @@ export class About extends Component {
           <div className="col-12 col-sm-6 m-auto ">
             <div className="card mt-2">
               <div className="card-header">
-                <h1 className="text-center">Created By</h1>
+                <h1 className="text-center">Github Finder v.1</h1>
               </div>
 
               <div className="card-body row">

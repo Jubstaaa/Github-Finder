@@ -6,17 +6,15 @@ const githubReducer = (state, action) => {
         users: action.payload,
         loading: false,
       };
+
     case "SET_LOADING":
       return {
         ...state,
         loading: true,
       };
-    case "SET_ALERT":
-      return {
-        alert: action.payload,
-      };
     case "REMOVE_ALERT":
       return {
+        ...state,
         alert: null,
       };
     case "GET_USER":
@@ -84,6 +82,11 @@ const githubReducer = (state, action) => {
         ...state,
         repos: [],
         loading: false,
+      };
+    case "SET_ALERT":
+      return {
+        ...state,
+        alert: action.payload,
       };
     default:
       return state;

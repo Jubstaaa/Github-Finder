@@ -15,7 +15,6 @@ const Search = () => {
       setAlert("Please enter a keyword", "danger");
     } else {
       searchUsers(keyword);
-
       setKeyword("");
     }
   };

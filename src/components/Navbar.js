@@ -11,7 +11,7 @@ export class Navbar extends Component {
             <i className={`${this.props.icon} mx-2`}></i>
             {this.props.title}
           </Link>
-          <div className="collapse navbar-collapse">
+          <div>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to="/about" className="nav-link">
