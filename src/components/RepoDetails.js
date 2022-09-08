@@ -1,4 +1,4 @@
-import React, { Component, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import RepoDetail from "./RepoDetail";
 import Loading from "./Loading";
 import UserDetailsHeader from "./UserDetailsHeader";

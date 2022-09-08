@@ -42,6 +42,35 @@ export class About extends Component {
                   >
                     Go Profile
                   </Link>
+                  <h2 id="features">Features</h2>
+                  <pre>
+                    <code>
+                      -<span class="ruby"> make a user search</span>-
+                      <span class="ruby">
+                        {" "}
+                        show user <span class="hljs-keyword">and</span> repo
+                        info
+                      </span>
+                      -
+                      <span class="ruby">
+                        {" "}
+                        show repo details <span class="hljs-keyword">
+                          and
+                        </span>{" "}
+                        files
+                      </span>
+                      -<span class="ruby"> show repo language information</span>
+                      -
+                      <span class="ruby">
+                        {" "}
+                        show file <span class="hljs-keyword">and</span> folder
+                        details
+                      </span>
+                      -<span class="ruby"> download files</span>-
+                      <span class="ruby"> error catches</span>-
+                      <span class="ruby"> responsive design</span>
+                    </code>
+                  </pre>
                 </div>
               </div>
             </div>
