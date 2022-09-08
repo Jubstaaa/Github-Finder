@@ -2,13 +2,26 @@ import React, { Component, useContext, useEffect } from "react";
 import Loading from "./Loading";
 import Repos from "./Repos";
 import GithubContext from "../context/githubContext";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 
 const UserDetails = ({ match }) => {
-  const { getUser, loading, user, colors, getUserRepos, repos } =
-    useContext(GithubContext);
+  const {
+    getUser,
+    loading,
+    user,
+    colors,
+    getUserRepos,
+    repos,
+    readme,
+    getReadme,
+  } = useContext(GithubContext);
   useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
+    getReadme(
+      `https://raw.githubusercontent.com/${match.params.login}/${match.params.login}/main/README.md`
+    );
   }, []);
 
   const {
@@ -99,6 +112,27 @@ const UserDetails = ({ match }) => {
             </div>
           </div>
           <div className="col-md-8">
+            {readme !== "" ? (
+              <div
+                className="card readme overflow-auto"
+                style={{ maxHeight: "500px" }}
+              >
+                <div className="p-4" style={{ whiteSpace: "pre-wrap" }}>
+                  <div className="text-mono text-small mb-3">
+                    {user.login}
+                    <span className="text-muted d-inline-block px-1">/</span>
+                    README<span className="text-muted">.md</span>
+                  </div>
+                  <ReactMarkdown
+                    children={readme}
+                    rehypePlugins={[rehypeRaw]}
+                  />
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
+
             <div className="card">
               <div className="card-body">
                 <div>

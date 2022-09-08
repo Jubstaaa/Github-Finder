@@ -20,11 +20,13 @@ const FileDetails = ({ match, history, location }) => {
         <div className="container">
           <div className="card overflow-auto" style={{ maxHeight: "500px" }}>
             <pre style={{ whiteSpace: "pre-wrap" }}>
-              <ReactMarkdown>
-                {typeof fileDetails.data !== "object"
-                  ? fileDetails.data
-                  : JSON.stringify(fileDetails.data)}
-              </ReactMarkdown>
+              <ReactMarkdown
+                children={
+                  typeof fileDetails.data !== "object"
+                    ? fileDetails.data
+                    : JSON.stringify(fileDetails.data)
+                }
+              />
             </pre>
           </div>
         </div>

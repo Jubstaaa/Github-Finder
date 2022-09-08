@@ -13,6 +13,7 @@ const GithubState = (props) => {
     repoDetails: [],
     fileDetails: [],
     languages: {},
+    readme: "",
     colors: {
       "1C Enterprise": {
         color: "#814CCC",
@@ -2437,6 +2438,27 @@ const GithubState = (props) => {
       });
   };
 
+  const getReadme = (url) => {
+    dispatch({ type: "CLEAR_README" });
+    setLoading();
+    axios
+      .get(`${url}`)
+      .then((res) => {
+        dispatch({
+          type: "GET_README",
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        if (err.response.status > 400) {
+          dispatch({
+            type: "GET_README",
+            payload: "",
+          });
+        }
+      });
+  };
+
   const getLanguageDetails = (username, repo) => {
     dispatch({ type: "CLEAR_LANGUAGES_DETAILS" });
     setLoading();
@@ -2503,6 +2525,7 @@ const GithubState = (props) => {
         fileDetails: state.fileDetails,
         languages: state.languages,
         colors: state.colors,
+        readme: state.readme,
         searchUsers,
         clearUsers,
         getUser,
@@ -2512,6 +2535,7 @@ const GithubState = (props) => {
         getFileDetails,
         getLanguageDetails,
         getColors,
+        getReadme,
       }}
     >
       {props.children}

@@ -8,6 +8,21 @@
 }
 
 pre img{
-    width:100% !important;
+    max-width:100% !important;
 }
 
+.readme img{
+    max-width:100% !important;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.text-mono {
+    font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace !important;
+}
+
+.text-small {
+    font-size: 12px !important;
+}

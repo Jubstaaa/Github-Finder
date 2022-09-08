@@ -3,6 +3,8 @@ import RepoDetail from "./RepoDetail";
 import Loading from "./Loading";
 import UserDetailsHeader from "./UserDetailsHeader";
 import GithubContext from "../context/githubContext";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 
 const RepoDetails = ({ match, history, location }) => {
   const {
@@ -16,6 +18,8 @@ const RepoDetails = ({ match, history, location }) => {
     user,
     languages,
     colors,
+    readme,
+    getReadme,
   } = useContext(GithubContext);
 
   useEffect(() => {
@@ -27,6 +31,9 @@ const RepoDetails = ({ match, history, location }) => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
     getLanguageDetails(match.params.login, match.params.repo);
+    getReadme(
+      `https://raw.githubusercontent.com/${match.params.login}/${match.params.repo}/main/README.md`
+    );
   }, []);
 
   useEffect(() => {
@@ -111,6 +118,23 @@ const RepoDetails = ({ match, history, location }) => {
               />
             ))}
           </ul>
+          {readme !== "" ? (
+            <div
+              className="card readme overflow-auto"
+              style={{ maxHeight: "500px" }}
+            >
+              <div className="p-4" style={{ whiteSpace: "pre-wrap" }}>
+                <div className="text-mono text-small mb-3">
+                  {user.login}
+                  <span className="text-muted d-inline-block px-1">/</span>
+                  README<span className="text-muted">.md</span>
+                </div>
+                <ReactMarkdown children={readme} rehypePlugins={[rehypeRaw]} />
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </>
     );

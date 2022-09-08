@@ -41,10 +41,22 @@ const githubReducer = (state, action) => {
         fileDetails: action.payload,
         loading: false,
       };
+    case "GET_README":
+      return {
+        ...state,
+        readme: action.payload,
+        loading: false,
+      };
     case "CLEAR_FILE_DETAILS":
       return {
         ...state,
         fileDetails: [],
+        loading: false,
+      };
+    case "CLEAR_README":
+      return {
+        ...state,
+        readme: "",
         loading: false,
       };
     case "GET_LANGUAGES_DETAILS":

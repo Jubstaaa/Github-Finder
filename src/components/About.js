@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import ReactMarkdown from "react-markdown";
 
 export class About extends Component {
   constructor(props) {
@@ -9,6 +10,16 @@ export class About extends Component {
     this.state = {
       user: {},
       loading: false,
+      features: `## Features
+
+      - make a user search
+      - show user, repo and readme info
+      - show repo details and files
+      - show repo language information
+      - show file, folder and readme details
+      - download files
+      - error catches
+      - responsive design`,
     };
   }
   componentDidMount() {
@@ -34,7 +45,7 @@ export class About extends Component {
                 <div className="col-12 col-sm-6">
                   <img src={this.state.user.avatar_url} className="img-fluid" />
                 </div>
-                <div className="col-12 col-sm-6">
+                <div className="mt-3 col-12 col-sm-6">
                   <h5 className="card-title">{this.state.user.login}</h5>
                   <Link
                     to={`/user/${this.state.user.login}`}
@@ -42,35 +53,9 @@ export class About extends Component {
                   >
                     Go Profile
                   </Link>
-                  <h2 id="features">Features</h2>
-                  <pre>
-                    <code>
-                      -<span class="ruby"> make a user search</span>-
-                      <span class="ruby">
-                        {" "}
-                        show user <span class="hljs-keyword">and</span> repo
-                        info
-                      </span>
-                      -
-                      <span class="ruby">
-                        {" "}
-                        show repo details <span class="hljs-keyword">
-                          and
-                        </span>{" "}
-                        files
-                      </span>
-                      -<span class="ruby"> show repo language information</span>
-                      -
-                      <span class="ruby">
-                        {" "}
-                        show file <span class="hljs-keyword">and</span> folder
-                        details
-                      </span>
-                      -<span class="ruby"> download files</span>-
-                      <span class="ruby"> error catches</span>-
-                      <span class="ruby"> responsive design</span>
-                    </code>
-                  </pre>
+                  <div className="mt-3">
+                    <ReactMarkdown children={this.state.features} />
+                  </div>
                 </div>
               </div>
             </div>
