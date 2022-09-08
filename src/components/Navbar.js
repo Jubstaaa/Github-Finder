@@ -8,11 +8,16 @@ export class Navbar extends Component {
       <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
         <div className="container">
           <Link to="/" className="navbar-brand">
-            <i className={`${this.props.icon} mx-2`}></i>
+            <i className={`${this.props.logo} mx-2`}></i>
             {this.props.title}
           </Link>
           <div>
             <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to="/" className="nav-link">
+                  <i className={`${this.props.icon} mx-2`}></i>
+                </Link>
+              </li>
               <li className="nav-item">
                 <Link to="/about" className="nav-link">
                   About
@@ -28,11 +33,13 @@ export class Navbar extends Component {
 
 Navbar.defaultProps = {
   title: "Github Finder",
-  icon: "fab fa-github",
+  logo: "fab fa-github",
+  icon: "fas fa-home",
 };
 
 Navbar.propTypes = {
   title: PropTypes.string.isRequired,
+  logo: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
 };
 
