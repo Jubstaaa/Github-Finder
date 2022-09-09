@@ -2438,11 +2438,11 @@ const GithubState = (props) => {
       });
   };
 
-  const getReadme = (url) => {
+  const getReadme = (url1, url2, url3, url4) => {
     dispatch({ type: "CLEAR_README" });
     setLoading();
     axios
-      .get(`${url}`)
+      .get(url1)
       .then((res) => {
         dispatch({
           type: "GET_README",
@@ -2451,10 +2451,44 @@ const GithubState = (props) => {
       })
       .catch((err) => {
         if (err.response.status > 400) {
-          dispatch({
-            type: "GET_README",
-            payload: "",
-          });
+          axios
+            .get(url2)
+            .then((res) => {
+              dispatch({
+                type: "GET_README",
+                payload: res.data,
+              });
+            })
+            .catch((err) => {
+              axios
+                .get(url3)
+                .then((res) => {
+                  dispatch({
+                    type: "GET_README",
+                    payload: res.data,
+                  });
+                })
+                .catch((err) => {
+                  if (err.response.status > 400) {
+                    axios
+                      .get(url4)
+                      .then((res) => {
+                        dispatch({
+                          type: "GET_README",
+                          payload: res.data,
+                        });
+                      })
+                      .catch((err) => {
+                        if (err.response.status > 400) {
+                          dispatch({
+                            type: "GET_README",
+                            payload: "",
+                          });
+                        }
+                      });
+                  }
+                });
+            });
         }
       });
   };

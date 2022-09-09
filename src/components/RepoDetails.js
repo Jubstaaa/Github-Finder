@@ -32,7 +32,10 @@ const RepoDetails = ({ match, history, location }) => {
     getUserRepos(match.params.login);
     getLanguageDetails(match.params.login, match.params.repo);
     getReadme(
-      `https://raw.githubusercontent.com/${match.params.login}/${match.params.repo}/main/README.md`
+      `https://raw.githubusercontent.com/${match.params.login}/${match.params.repo}/main/README.md`,
+      `https://raw.githubusercontent.com/${match.params.login}/${match.params.repo}/main/readme.md`,
+      `https://raw.githubusercontent.com/${match.params.login}/${match.params.repo}/master/README.md`,
+      `https://raw.githubusercontent.com/${match.params.login}/${match.params.repo}/master/readme.md`
     );
   }, []);
 

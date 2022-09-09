@@ -20,7 +20,10 @@ const UserDetails = ({ match }) => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
     getReadme(
-      `https://raw.githubusercontent.com/${match.params.login}/${match.params.login}/main/README.md`
+      `https://raw.githubusercontent.com/${match.params.login}/${match.params.login}/main/README.md`,
+      `https://raw.githubusercontent.com/${match.params.login}/${match.params.login}/main/readme.md`,
+      `https://raw.githubusercontent.com/${match.params.login}/${match.params.login}/master/README.md`,
+      `https://raw.githubusercontent.com/${match.params.login}/${match.params.login}/master/readme.md`
     );
   }, []);
 
